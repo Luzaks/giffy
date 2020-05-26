@@ -7,9 +7,11 @@ export default function  getData ({keyword = 'rock'} = {}) {
         .then(response => response.json())
         .then((response) => {
             const {data} = response;
-            const gifs = data.map(
-                image => image.images.downsized_medium.url
-            );
+            const gifs = data.map(image => {
+                const { images, title, id } = image;
+                const url =  images.downsized_medium.url;
+                return { url, title, id };
+            });
             return gifs;
         })
 };

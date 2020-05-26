@@ -1,23 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import getData from "./modules/getData";
+import ListOfGifs from "./components/ListOfGifts";
 
 function App() {
+    const [keyword, setKeyword] = useState('rock');
 
-  const [gifs, setGifs] = useState([]);
-  useEffect(function(){
-        getData().then((images) => {
-            setGifs(images);
-        });
-  }, []);
-  return (
+    return (
     <div className="App">
       <section className="App-header">
-          {
-              gifs.map(singleGif =>
-                  <img src={singleGif} alt="gift"/>
-              )
-          }
+          <button onClick={() => setKeyword('party')}>
+              Change keyword
+          </button>
+          <ListOfGifs keyword={keyword} />
       </section>
     </div>
   );
